@@ -7,8 +7,8 @@ export interface VideoDtoOptions {
   readonly duration: string
   readonly thumbnail: string
   readonly viewCount: number
-  readonly likeCount: number
-  readonly dislikeCount: number
+  readonly likeCount?: number
+  readonly dislikeCount?: number
 }
 
 export class VideoDto {
@@ -20,8 +20,8 @@ export class VideoDto {
   readonly duration: string
   readonly thumbnail: string
   readonly viewCount: number
-  readonly likeCount: number
-  readonly dislikeCount: number
+  readonly likeCount?: number
+  readonly dislikeCount?: number
 
   constructor (videoDtoOptions: VideoDtoOptions) {
     const {

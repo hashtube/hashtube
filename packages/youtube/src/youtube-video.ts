@@ -15,8 +15,8 @@ export interface VideoContentDetails {
 
 export interface VideoStatistics {
   readonly viewCount: number
-  readonly likeCount: number
-  readonly dislikeCount: number
+  readonly likeCount?: number
+  readonly dislikeCount?: number
 }
 
 export interface Video {
