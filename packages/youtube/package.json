@@ -1,0 +1,24 @@
+{
+  "name": "@hashtube/youtube",
+  "version": "0.0.0",
+  "repository": "https://github.com/hashtube/hashtube/tree/master/packages/youtube",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "ht-dev clean",
+    "build": "ht-dev build",
+    "lint": "ht-dev tslint",
+    "prettier": "ht-dev prettier",
+    "prepare-release": "npm run clean && npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "axios": "0.19.0"
+  },
+  "devDependencies": {
+    "@hashtube/dev": "0.0.0",
+    "@types/axios": "0.14.0"
+  }
+}
