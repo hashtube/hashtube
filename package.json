@@ -1,0 +1,22 @@
+{
+  "name": "hashtube",
+  "private": true,
+  "scripts": {
+    "init": "npm run boot -- --scope=@hashtube/dev && npm run build-dev && npm run boot && npm run build",
+    "boot": "lerna bootstrap --hoist",
+    "link": "lerna link",
+    "clean": "node ./scripts/dev run clean",
+    "clean-all": "npm run clean && node ./scripts/dev run clean-all && lerna clean --yes",
+    "build-dev": "cd ./tools/dev && npm run build",
+    "build": "node ./scripts/dev run --ignore @hashtube/dev build",
+    "format": "node ./scripts/dev run lint",
+    "format-ci": "node ./scripts/dev run prettier && npm run format",
+    "watch": "npm run build && node ./scripts/dev watch build",
+    "check-deps": "node ./scripts/dev check-deps",
+    "view-release": "node ./scripts/dev run prepare-release && lerna version --no-push",
+    "push-release": "node ./scripts/dev run prepare-release && lerna publish"
+  },
+  "devDependencies": {
+    "lerna": "3.16.4"
+  }
+}
