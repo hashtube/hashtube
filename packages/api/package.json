@@ -1,0 +1,33 @@
+{
+  "name": "@hashtube/api",
+  "version": "0.0.0",
+  "repository": "https://github.com/hashtube/hashtube/tree/master/packages/api",
+  "license": "MIT",
+  "main": "lib/main.js",
+  "scripts": {
+    "clean": "ht-dev clean",
+    "build": "ht-dev build",
+    "lint": "ht-dev tslint",
+    "prettier": "ht-dev prettier",
+    "prepare-release": "npm run clean && npm run build",
+    "dev": "NODE_ENV=development NODE_CONFIG_DIR=../../config node lib/main.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@hashtube/core": "0.0.0",
+    "@hashtube/youtube": "0.0.0",
+    "@nestjs/common": "6.5.3",
+    "@nestjs/core": "6.5.3",
+    "@nestjs/platform-express": "6.5.3",
+    "config": "3.2.2",
+    "helmet": "3.20.0",
+    "reflect-metadata": "0.1.13"
+  },
+  "devDependencies": {
+    "@hashtube/dev": "0.0.0",
+    "@types/config": "0.0.34",
+    "@types/helmet": "0.0.43"
+  }
+}

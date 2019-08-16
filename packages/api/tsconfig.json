@@ -1,0 +1,11 @@
+{
+  "extends": "./node_modules/@hashtube/dev/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": []
+}
