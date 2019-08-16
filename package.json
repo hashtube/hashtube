@@ -14,9 +14,12 @@
     "watch": "npm run build && node ./scripts/dev watch build",
     "check-deps": "node ./scripts/dev check-deps",
     "view-release": "node ./scripts/dev run prepare-release && lerna version --no-push",
-    "push-release": "node ./scripts/dev run prepare-release && lerna publish"
+		"push-release": "node ./scripts/dev run prepare-release && lerna publish",
+    "open-cy": "cypress open",
+    "test-cy": "cypress run"
   },
   "devDependencies": {
+    "cypress": "3.4.1",
     "lerna": "3.16.4"
   }
 }
