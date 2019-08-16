@@ -1,0 +1,21 @@
+{
+  "name": "@hashtube/core",
+  "version": "0.0.0",
+  "repository": "https://github.com/hashtube/hashtube/tree/master/packages/core",
+  "license": "MIT",
+  "scripts": {
+    "clean": "ht-dev clean",
+    "build": "ht-dev build",
+    "lint": "ht-dev tslint",
+    "prettier": "ht-dev prettier",
+    "prepare-release": "npm run clean && npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@hashtube/dev": "0.0.0"
+  }
+}
