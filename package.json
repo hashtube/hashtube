@@ -2,24 +2,28 @@
   "name": "hashtube",
   "private": true,
   "scripts": {
-    "init": "npm run boot -- --scope=@hashtube/dev && npm run build-dev && npm run boot && npm run build",
+    "init": "npm install && npm run boot -- --scope=@hashtube/dev && npm run build-dev && npm run boot && npm run build",
     "boot": "lerna bootstrap --hoist",
     "link": "lerna link",
     "clean": "node ./scripts/dev run clean",
-    "clean-all": "npm run clean && node ./scripts/dev run clean-all && lerna clean --yes",
+    "clean-full": "npm run clean && node ./scripts/dev run clean-all && lerna clean --yes",
     "build-dev": "cd ./tools/dev && npm run build",
     "build": "node ./scripts/dev run --ignore @hashtube/dev build",
-    "format": "node ./scripts/dev run lint",
-    "format-ci": "node ./scripts/dev run prettier && npm run format",
+    "format": "node ./scripts/dev run lint && npm run lint-cy",
+    "format-full": "node ./scripts/dev run prettier && npm run prettier-cy && npm run format",
     "watch": "npm run build && node ./scripts/dev watch build",
     "check-deps": "node ./scripts/dev check-deps",
     "view-release": "node ./scripts/dev run prepare-release && lerna version --no-push",
     "push-release": "node ./scripts/dev run prepare-release && lerna publish",
+    "lint-cy": "cd cypress && node ../scripts/dev eslint && node ../scripts/dev tslint",
+    "prettier-cy": "cd cypress && node ../scripts/dev prettier '**/*.ts'",
     "open-cy": "cypress open",
     "test-cy": "cypress run"
   },
   "devDependencies": {
+    "@bahmutov/add-typescript-to-cypress": "2.1.2",
     "cypress": "3.4.1",
-    "lerna": "3.16.4"
+    "lerna": "3.16.4",
+    "webpack": "4.39.2"
   }
 }

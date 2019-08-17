@@ -1,0 +1,3 @@
+{
+  "extends": "../tools/dev/eslint.json"
+}
