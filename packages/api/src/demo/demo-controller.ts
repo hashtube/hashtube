@@ -6,7 +6,7 @@ import { YouTubeService } from '../youtube'
 export class DemoController {
   constructor (private readonly youTubeService: YouTubeService) {}
 
-  @Get('video/:id')
+  @Get('videos/:id')
   async findOne (@Param('id') id: string): Promise<VideoDto> {
     const video: VideoDto | undefined = await this.youTubeService.getVideoById(id)
     if (!video) {

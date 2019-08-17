@@ -1,7 +1,7 @@
 describe('/api/demo', () => {
   describe('GET /video/:id', () => {
     it('should return the video', () => {
-      cy.request('http://localhost:4100/demo/video/Bv_5Zv5c-Ts').then((response) => {
+      cy.request('http://localhost:4100/demo/videos/Bv_5Zv5c-Ts').then((response) => {
         const video = response.body
         expect(video.id).to.equal('Bv_5Zv5c-Ts')
         expect(video.publishedAt).to.have.string('2015-04-03')
