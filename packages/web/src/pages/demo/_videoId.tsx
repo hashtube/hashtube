@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MetaInfo } from 'vue-meta'
 import { VideoPlayer } from '../../components/video/video-player'
-import { linkify, LinkifyText } from '../../utils/linkify'
+import { linkify, LinkifyText } from '../../utils/links'
 
 @Component<VideoPage>({
   components: {
@@ -33,9 +33,16 @@ export default class VideoPage extends Vue {
     return (
       <div>
         <video-player video={this.video}/>
-        <v-container>
-          <h1 class='title my-3'>{this.video.title}</h1>
-          <p class='text__white-space-pre-wrap'>{this.linkifyDescription.text}</p>
+        <v-container class='my-3'>
+          <v-row>
+            <v-col cols={12} md={7}>
+              <h1 class='title mb-3'>{this.video.title}</h1>
+              <p class='text__white-space-pre-wrap'>{this.linkifyDescription.text}</p>
+            </v-col>
+            <v-col cols={12} md={5}>
+              <h2 class='subtitle-2'>Related Videos</h2>
+            </v-col>
+          </v-row>
         </v-container>
       </div>
     )

@@ -1,5 +1,5 @@
 import { VideoDto } from '@hashtube/core/lib/video'
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Player, withYouTube } from '../../utils/youtube'
 import './video-player.scss'
 
