@@ -1,5 +1,8 @@
+import { ChannelDto } from './channel-dto'
+
 export interface VideoDtoOptions {
   readonly id: string
+  readonly channel: ChannelDto
   readonly publishedAt: string
   readonly title: string
   readonly description: string
@@ -13,6 +16,7 @@ export interface VideoDtoOptions {
 
 export class VideoDto {
   readonly id: string
+  readonly channel: ChannelDto
   readonly publishedAt: string
   readonly title: string
   readonly description: string
@@ -23,9 +27,10 @@ export class VideoDto {
   readonly likeCount?: number
   readonly dislikeCount?: number
 
-  constructor (videoDtoOptions: VideoDtoOptions) {
+  constructor (videoDtoOptions: Omit<VideoDto, '__isDto'>) {
     const {
       id,
+      channel,
       publishedAt,
       title,
       description,
@@ -37,6 +42,7 @@ export class VideoDto {
       dislikeCount,
     } = videoDtoOptions
     this.id = id
+    this.channel = channel
     this.publishedAt = publishedAt
     this.title = title
     this.description = description

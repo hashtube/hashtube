@@ -11,6 +11,8 @@ export interface PageInfo {
 export interface ListResponse<T> {
   readonly error?: RequestError
   readonly etag: string
+  readonly prevPageToken: string
+  readonly nextPageToken: string
   readonly pageInfo: PageInfo
   readonly items: T[]
 }
