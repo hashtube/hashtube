@@ -37,7 +37,7 @@ export default class VideoPage extends Vue {
           <v-row>
             <v-col cols={12} md={7}>
               <h1 class='title mb-3'>{this.video.title}</h1>
-              <p class='text__white-space-pre-wrap'>{this.linkifyDescription.text}</p>
+              <div domProps={{ innerHTML: this.linkifyDescription.text }}/>
             </v-col>
             <v-col cols={12} md={5}>
               <h2 class='subtitle-2'>Related Videos</h2>
