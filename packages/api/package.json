@@ -28,6 +28,6 @@
   "devDependencies": {
     "@hashtube/dev": "0.0.0",
     "@types/config": "0.0.34",
-    "@types/helmet": "0.0.43"
+    "@types/helmet": "0.0.44"
   }
 }

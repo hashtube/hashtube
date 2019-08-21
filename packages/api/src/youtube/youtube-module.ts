@@ -6,7 +6,7 @@ import { YouTubeService } from './youtube-service'
 const youTubeConfig: YouTube.Config = config.get<YouTube.Config>('youTube')
 
 @Module({
-  providers: [YouTubeService, { provide: 'youTubeConfig', useValue: youTubeConfig }],
+  providers: [{ provide: 'youTubeConfig', useValue: youTubeConfig }, YouTubeService],
   exports: [YouTubeService],
 })
 export class YouTubeModule {}

@@ -1,5 +1,5 @@
 import { VideoDto } from '@hashtube/core/lib/video'
-import { Context } from '@nuxt/vue-app'
+import { Context } from '@nuxt/types'
 import axios from 'axios'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MetaInfo } from 'vue-meta'

@@ -1,17 +1,39 @@
 import { VideoDto } from '@hashtube/core/lib/video'
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
-import { YouTubeService } from '../youtube'
+import { Controller, ForbiddenException, Get, Headers, Inject, NotFoundException, Param, Post } from '@nestjs/common'
+import { DemoConfig } from './demo-config'
+import { DemoService } from './demo-service'
 
 @Controller('demo')
 export class DemoController {
-  constructor (private readonly youTubeService: YouTubeService) {}
+  constructor (
+    @Inject('demoConfig')
+    private readonly demoConfig: DemoConfig,
+    private readonly demoService: DemoService,
+  ) {}
+
+  @Get('videos')
+  getAllVideos (): VideoDto[] {
+    return this.demoService.getAllVideos()
+  }
 
   @Get('videos/:id')
-  async findOne (@Param('id') id: string): Promise<VideoDto> {
-    const video: VideoDto | undefined = await this.youTubeService.getVideoById(id)
+  getVideoById (@Param('id') id: string): VideoDto {
+    const video: VideoDto | undefined = this.demoService.getVideoById(id)
     if (!video) {
       throw new NotFoundException()
     }
     return video
+  }
+
+  @Post('admin/refresh')
+  async refreshData (@Headers('x-api-key') apiKey: string): Promise<void> {
+    this.checkApiKey(apiKey)
+    await this.demoService.refreshData()
+  }
+
+  private checkApiKey (apiKey: string): void {
+    if (apiKey !== this.demoConfig.secretKey) {
+      throw new ForbiddenException()
+    }
   }
 }
