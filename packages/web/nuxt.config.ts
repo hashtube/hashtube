@@ -1,8 +1,8 @@
-import NuxtConfiguration from '@nuxt/config'
+import { Configuration } from '@nuxt/types'
 import path from 'path'
 import sass from 'sass'
 
-const nuxtConfig: NuxtConfiguration = {
+const nuxtConfig: Configuration = {
   rootDir: __dirname,
   srcDir: path.join(__dirname, 'src'),
   server: {
@@ -30,14 +30,16 @@ const nuxtConfig: NuxtConfiguration = {
     ],
   },
   css: [path.join(__dirname, 'src/assets/main.scss')],
-  build: {
-    extractCSS: true,
-    typescript: {
+  buildModules: [
+    ['@nuxt/typescript-build', {
       typeCheck: {
         // Only check src files
         reportFiles: ['src/**/*.{ts,tsx}'],
       },
-    },
+    }],
+  ],
+  build: {
+    extractCSS: true,
     loaders: {
       scss: {
         implementation: sass,

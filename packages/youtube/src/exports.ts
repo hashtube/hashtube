@@ -1,4 +1,6 @@
 export * from './youtube-thumbnail'
+export * from './youtube-channel'
 export * from './youtube-video'
+export * from './youtube-search'
 export * from './youtube-config'
 export * from './youtube-api-client'
