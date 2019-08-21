@@ -1,19 +1,5 @@
 import { ChannelDto } from './channel-dto'
 
-export interface VideoDtoOptions {
-  readonly id: string
-  readonly channel: ChannelDto
-  readonly publishedAt: string
-  readonly title: string
-  readonly description: string
-  readonly tags: string[]
-  readonly duration: string
-  readonly thumbnail: string
-  readonly viewCount: number
-  readonly likeCount?: number
-  readonly dislikeCount?: number
-}
-
 export class VideoDto {
   readonly id: string
   readonly channel: ChannelDto
