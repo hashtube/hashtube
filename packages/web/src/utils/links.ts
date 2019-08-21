@@ -1,35 +1,37 @@
 import LinkifyIt from 'linkify-it'
 
-export interface LinkifyText {
-  text: string
+const linkifyIt = new LinkifyIt()
+
+export interface LinkifiedText {
+  html: string
   urls: string[]
 }
 
-const maxLength = 50
-const linkifyIt = new LinkifyIt()
+const truncateLinkText = (linkText: string, maxLength = 50) => {
+  return linkText.length <= maxLength ? linkText : `${linkText.substring(0, maxLength - 3)}...`
+}
 
-export const linkify = (text: string): LinkifyText => {
-  const content = text.replace(/\r?\n/g, '<br>')
-  const matches = linkifyIt.match(content)
-  const result = []
+export const linkify = (text: string): LinkifiedText => {
+  const matches = linkifyIt.match(text)
+  const parts = []
   let lastIndex = 0
   if (matches) {
-    matches.forEach((match) => {
+    for (const match of matches) {
       if (lastIndex < match.index) {
-        result.push(content.slice(lastIndex, match.index))
+        parts.push(text.slice(lastIndex, match.index))
       }
-      result.push(`<a target='_blank' href='${match.url}'>`)
-      result.push(match.text.length > maxLength ? `${match.text.substring(0, maxLength - 3)}...` : match.text)
-      result.push('</a>')
+      parts.push(`<a target='_blank' href='${match.url}'>`)
+      parts.push(truncateLinkText(match.text))
+      parts.push('</a>')
       lastIndex = match.lastIndex
-    })
+    }
   }
-  if (lastIndex < content.length) {
-    result.push(content.slice(lastIndex))
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex))
   }
   const urls: string[] = matches ? matches.map(({ url }) => url) : []
   return {
-    text: result.join(''),
+    html: parts.join('').replace(/\r?\n/g, '<br>'),
     urls,
   }
 }
