@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MetaInfo } from 'vue-meta'
 import { VideoPlayer } from '../../components/video/video-player'
-import { linkify, LinkifyText } from '../../utils/links'
+import { LinkifiedText, linkify } from '../../utils/links'
 
 @Component<VideoPage>({
   components: {
@@ -15,13 +15,13 @@ import { linkify, LinkifyText } from '../../utils/links'
     const video = (await axios.get<VideoDto>(`http://localhost:4000/api/demo/videos/${params.videoId}`)).data
     return {
       video,
-      linkifyDescription: linkify(video.description),
+      linkifiedDescription: linkify(video.description),
     }
   },
 })
 export default class VideoPage extends Vue {
   readonly video!: VideoDto
-  readonly linkifyDescription!: LinkifyText
+  readonly linkifiedDescription!: LinkifiedText
 
   head (): MetaInfo {
     return {
@@ -37,7 +37,7 @@ export default class VideoPage extends Vue {
           <v-row>
             <v-col cols={12} md={7}>
               <h1 class='title mb-3'>{this.video.title}</h1>
-              <p class='text__white-space-pre-wrap'>{this.linkifyDescription.text}</p>
+              <p domProps={{ innerHTML: this.linkifiedDescription.html }}/>
             </v-col>
             <v-col cols={12} md={5}>
               <h2 class='subtitle-2'>Related Videos</h2>
