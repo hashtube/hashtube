@@ -30,15 +30,15 @@ export const watch = async (argv: string[]): Promise<number> => {
     fs.mkdirSync(path.dirname(path.join(rootPath, infoPath)), { recursive: true })
   }
   watcher.on('change', async (filePath) => {
-    const pkgPath = filePath.split('src')[0]
+    const pkgPath = path.join(rootPath, path.relative(rootPath, filePath).split('src')[0])
     try {
       await npm(['run', scriptName], { cwd: pkgPath })
+      if (infoPath) {
+        fs.writeFileSync(path.join(rootPath, infoPath), `${pkgPath}: ${new Date()}`)
+      }
     } catch (err) {
       console.log(`${pkgPath}: '${scriptName}' failed`)
       console.log(err)
-    }
-    if (infoPath) {
-      fs.writeFileSync(path.join(rootPath, infoPath), `${pkgPath}: ${new Date()}`)
     }
     console.log('Done')
   })
