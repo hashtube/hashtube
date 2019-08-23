@@ -6,6 +6,7 @@ const nuxtConfig: Configuration = {
   rootDir: __dirname,
   srcDir: path.join(__dirname, 'src'),
   server: {
+    host: '0.0.0.0',
     port: 4000,
   },
   serverMiddleware: [{ path: '/api', handler: path.join(__dirname, 'src/server/api-handler') }],
