@@ -10,7 +10,7 @@
     "lint": "ht-dev tslint",
     "prettier": "ht-dev prettier",
     "prepare-release": "npm run clean && npm run build",
-    "dev": "NODE_ENV=development NODE_CONFIG_DIR=../../config node lib/main.js"
+    "dev": "nodemon"
   },
   "publishConfig": {
     "access": "public"
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@hashtube/dev": "0.0.0",
     "@types/config": "0.0.34",
-    "@types/helmet": "0.0.44"
+    "@types/helmet": "0.0.44",
+    "nodemon": "1.19.1"
   }
 }
