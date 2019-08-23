@@ -1,0 +1,9 @@
+{
+  "watch": [
+    "../../tmp/build-info.txt"
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "NODE_CONFIG_DIR": "../../config"
+  }
+}
