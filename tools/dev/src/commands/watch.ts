@@ -15,9 +15,12 @@ const shouldWatch = (pkgPath: string, scriptName: string): boolean => {
 }
 
 export const watch = async (argv: string[]): Promise<number> => {
-  const scriptName = argv[0]
-  const infoPath = argv[1]
   const rootPath = process.cwd()
+  const scriptName = argv[0]
+  const infoPath = path.join(rootPath, argv[1])
+  if (infoPath) {
+    fs.mkdirSync(path.dirname(infoPath), { recursive: true })
+  }
   const packages = findPackages(rootPath, (pkgPath) => shouldWatch(pkgPath, scriptName))
   console.log(`Watching the following packages to run '${scriptName}' script:`)
   console.log()
@@ -26,15 +29,12 @@ export const watch = async (argv: string[]): Promise<number> => {
   })
   console.log()
   const watcher = chokidar.watch(packages.map((pkgPath) => path.join(pkgPath, 'src')))
-  if (infoPath) {
-    fs.mkdirSync(path.dirname(path.join(rootPath, infoPath)), { recursive: true })
-  }
   watcher.on('change', async (filePath) => {
     const pkgPath = path.join(rootPath, path.relative(rootPath, filePath).split('src')[0])
     try {
       await npm(['run', scriptName], { cwd: pkgPath })
       if (infoPath) {
-        fs.writeFileSync(path.join(rootPath, infoPath), `${pkgPath}: ${new Date()}`)
+        fs.writeFileSync(infoPath, `rebuild: ${new Date()}`)
       }
     } catch (err) {
       console.log(`${pkgPath}: '${scriptName}' failed`)
@@ -43,5 +43,8 @@ export const watch = async (argv: string[]): Promise<number> => {
     console.log('Done')
   })
   watcher.on('error', console.error)
+  if (infoPath) {
+    fs.writeFileSync(infoPath, `ready: ${new Date()}`)
+  }
   return 0
 }

@@ -47,9 +47,7 @@ export class YouTubeService {
 
   async getVideosByChannel (channel: ChannelDto): Promise<VideoDto[]> {
     const searchResults: YouTube.Search[] = await this.youTubeApi.getVideosByChannelId(channel.id)
-    const videoIds: string[] = searchResults
-      .map((searchResult) => searchResult.id.videoId || '')
-      .filter(Boolean)
+    const videoIds: string[] = searchResults.map((searchResult) => searchResult.id.videoId || '').filter(Boolean)
     const videos: VideoDto[] = []
     for (const videoId of videoIds) {
       const youTubeVideo: YouTube.Video | undefined = await this.youTubeApi.getVideoById(videoId)
