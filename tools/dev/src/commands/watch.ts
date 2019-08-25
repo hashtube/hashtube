@@ -34,7 +34,7 @@ export const watch = async (argv: string[]): Promise<number> => {
     try {
       await npm(['run', scriptName], { cwd: pkgPath })
       if (infoPath) {
-        fs.writeFileSync(infoPath, `${pkgPath}: ${new Date()}`)
+        fs.writeFileSync(infoPath, `rebuild: ${new Date()}`)
       }
     } catch (err) {
       console.log(`${pkgPath}: '${scriptName}' failed`)
