@@ -8,6 +8,7 @@ services:
   api:
     depends_on:
       - watch
+    restart: on-failure
     image: hashtube/dev-nodejs
     volumes:
       - .:/usr/src/app
@@ -18,6 +19,7 @@ services:
     depends_on:
       - watch
       - api
+    restart: on-failure
     image: hashtube/dev-nodejs
     volumes:
       - .:/usr/src/app
