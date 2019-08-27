@@ -26,12 +26,11 @@ export class DemoController {
   }
 
   @Get('videos/:id/links')
-  async getLinkPreviewsById (@Param('id') id: string): Promise<LinkPreviewDto[]> {
-    const video: VideoDto | undefined = this.demoService.getVideoById(id)
-    if (!video) {
+  async getLinkPreviewsByVideoId (@Param('id') id: string): Promise<LinkPreviewDto[]> {
+    const linkPreviews: LinkPreviewDto[] | undefined = await this.demoService.getLinkPreviewsByVideoId(id)
+    if (!linkPreviews) {
       throw new NotFoundException()
     }
-    const linkPreviews: LinkPreviewDto[] = await this.demoService.getLinkPreviewsByVideo(video)
     return linkPreviews
   }
 

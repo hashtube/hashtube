@@ -46,6 +46,9 @@ const nuxtConfig: Configuration = {
         implementation: sass,
       },
     },
+    babel: {
+      plugins: ['@babel/plugin-transform-modules-commonjs'],
+    },
   },
 }
 

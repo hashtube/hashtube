@@ -23,6 +23,7 @@
     "vuetify": "2.0.10"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "7.5.0",
     "@hashtube/core": "0.0.0",
     "@hashtube/dev": "0.0.0",
     "@nuxt/typescript-build": "0.1.11",
