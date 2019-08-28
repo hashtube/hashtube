@@ -2,16 +2,17 @@ import LinkifyIt from 'linkify-it'
 
 const linkifyIt = new LinkifyIt()
 
-export interface LinkifiedText {
-  html: string
-  urls: string[]
-}
-
 const truncateLinkText = (linkText: string, maxLength = 50) => {
   return linkText.length <= maxLength ? linkText : `${linkText.substring(0, maxLength - 3)}...`
 }
 
-export const linkify = (text: string): LinkifiedText => {
+export const getUrls = (text: string): string[] => {
+  const matches = linkifyIt.match(text)
+  const urls: string[] = matches ? matches.map(({ url }) => url) : []
+  return urls
+}
+
+export const getHtml = (text: string): string => {
   const matches = linkifyIt.match(text)
   const parts = []
   let lastIndex = 0
@@ -29,9 +30,5 @@ export const linkify = (text: string): LinkifiedText => {
   if (lastIndex < text.length) {
     parts.push(text.slice(lastIndex))
   }
-  const urls: string[] = matches ? matches.map(({ url }) => url) : []
-  return {
-    html: parts.join('').replace(/\r?\n/g, '<br>'),
-    urls,
-  }
+  return parts.join('').replace(/\r?\n/g, '<br>')
 }

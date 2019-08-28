@@ -1,4 +1,4 @@
-import { VideoDto } from '@hashtube/core/lib/video'
+import { LinkPreviewDto, VideoDto } from '@hashtube/core/lib/video'
 import { Controller, ForbiddenException, Get, Headers, Inject, NotFoundException, Param, Post } from '@nestjs/common'
 import { DemoConfig } from './demo-config'
 import { DemoService } from './demo-service'
@@ -23,6 +23,15 @@ export class DemoController {
       throw new NotFoundException()
     }
     return video
+  }
+
+  @Get('videos/:id/links')
+  async getLinkPreviewsByVideoId (@Param('id') id: string): Promise<LinkPreviewDto[]> {
+    const linkPreviews: LinkPreviewDto[] | undefined = await this.demoService.getLinkPreviewsByVideoId(id)
+    if (!linkPreviews) {
+      throw new NotFoundException()
+    }
+    return linkPreviews
   }
 
   @Post('admin/refresh')

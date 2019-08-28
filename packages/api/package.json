@@ -21,12 +21,17 @@
     "@nestjs/common": "6.5.3",
     "@nestjs/core": "6.5.3",
     "@nestjs/platform-express": "6.5.3",
+    "axios": "0.19.0",
     "config": "3.2.2",
     "helmet": "3.20.0",
+    "metascraper": "5.6.6",
+    "metascraper-title": "5.6.6",
+    "metascraper-description": "5.6.6",
     "reflect-metadata": "0.1.13"
   },
   "devDependencies": {
     "@hashtube/dev": "0.0.0",
+    "@types/axios": "0.14.0",
     "@types/config": "0.0.34",
     "@types/helmet": "0.0.44",
     "nodemon": "1.19.1"

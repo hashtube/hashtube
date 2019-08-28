@@ -1,6 +1,11 @@
-import { ChannelDto, VideoDto } from '@hashtube/core/lib/video'
+import { getUrls } from '@hashtube/core/lib/utils/link-helper'
+import { ChannelDto, LinkPreviewDto, VideoDto } from '@hashtube/core/lib/video'
 import { Inject, Injectable } from '@nestjs/common'
+import axios from 'axios'
 import fs from 'fs'
+import metascraper from 'metascraper'
+import metascraperDescription from 'metascraper-description'
+import metascraperTitle from 'metascraper-title'
 import path from 'path'
 import { YouTubeService } from '../youtube'
 import { DemoConfig } from './demo-config'
@@ -32,6 +37,22 @@ export class DemoService {
 
   getVideoById (id: string): VideoDto | undefined {
     return this.data.videos.find((video) => video.id === id)
+  }
+
+  async getLinkPreviewsByVideoId (id: string): Promise<LinkPreviewDto[] | undefined> {
+    const video: VideoDto | undefined = this.getVideoById(id)
+    if (!video) {
+      return
+    }
+    const linkPreviews: LinkPreviewDto[] = []
+    const scraper = metascraper([metascraperDescription(), metascraperTitle()])
+    const urls: string[] = getUrls(video.description)
+    for (const url of urls) {
+      const html = (await axios.get<string>(url)).data
+      const { title, description } = await scraper({ html, url })
+      linkPreviews.push(new LinkPreviewDto({ url, title, description }))
+    }
+    return linkPreviews
   }
 
   async refreshData (): Promise<void> {
